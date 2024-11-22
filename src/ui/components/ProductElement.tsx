@@ -1,17 +1,14 @@
 import { LinkWithChannel } from "../atoms/LinkWithChannel";
 import { ProductImageWrapper } from "@/ui/atoms/ProductImageWrapper";
 
-import type { ProductListItemFragment } from "@/gql/graphql";
-import { formatMoneyRange } from "@/lib/utils";
-
 export function ProductElement({
 	product,
 	loading,
 	priority,
-}: { product: ProductListItemFragment } & { loading: "eager" | "lazy"; priority?: boolean }) {
+}: { product: any } & { loading: "eager" | "lazy"; priority?: boolean }) {
 	return (
 		<li data-testid="ProductElement">
-			<LinkWithChannel href={`/products/${product.slug}`} key={product.id}>
+			<LinkWithChannel href={`/products/${product.id}`} key={product.id}>
 				<div>
 					{product?.thumbnail?.url && (
 						<ProductImageWrapper
@@ -32,10 +29,7 @@ export function ProductElement({
 							</p>
 						</div>
 						<p className="mt-1 text-sm font-medium text-neutral-900" data-testid="ProductElement_PriceRange">
-							{formatMoneyRange({
-								start: product?.pricing?.priceRange?.start?.gross,
-								stop: product?.pricing?.priceRange?.stop?.gross,
-							})}
+							{product.price}
 						</p>
 					</div>
 				</div>
